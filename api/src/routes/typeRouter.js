@@ -1,12 +1,14 @@
 const { Router } = require("express");
+const { getTypes } = require("../controllers/controllers");
 
 const typeRouter = Router();
 
-typeRouter.get("/" , (req,res) => {
+typeRouter.get("/" , async (req,res) => {
     try {
-        res.status(200).send("ok");
+        const typesApi = await getTypes();
+        res.status(200).json(typesApi);
     } catch (error) {
-        res.status(400).json({error: error.message});
+        res.status(400).send(error.message);
     }
 });
 
