@@ -17,6 +17,7 @@ const getPokemons = async () => {
             const resultApi = await axios.get(url);
             return {
                 id: resultApi.data.id,
+                image: resultApi.data.sprites.other.dream_world.front_default,
                 name: resultApi.data.name,
                 type: (resultApi.data.types.map(data => data.type.name)).join(",")
             };
@@ -31,61 +32,73 @@ const getNextPage = async (nextUrl) => {
 }
 
 const getQuery = async (name) => {
-    if (!name) throw Error("Debe ingresar un nombre de pokémon a buscar");
-    const pokemonName = name.toLowerCase();
-    const getApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
-    // if (!getApi.data.name) throw Error(`No existe Pokémon con el nombre: ${name}`);
-    const resultsApi = {
-        id: getApi.data.id,
-        name: getApi.data.name,
-        type: (getApi.data.types.map(tipo => tipo.type.name)).join(",")
-    }
-    return resultsApi;
+    try {
+        const getDB = await Pokemon.findAll();
+        const findPokemon = getDB.find(pokemon => (pokemon.name).toLowerCase() == name.toLowerCase());
+        if (findPokemon) return findPokemon;
+
+        const pokemonName = name.toLowerCase();
+        const getApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`);
+        const resultsApi = {
+            id: getApi.data.id,
+            image: getApi.data.sprites.other.dream_world.front_default,
+            name: getApi.data.name,
+            type: (getApi.data.types.map(tipo => tipo.type.name)).join(",")
+        }
+
+        return resultsApi;
+
+    } catch (error) {
+        throw Error(`No se encontro Pokémon con el nombre: ${name}`)
+    } 
 };
 
 const getIdPokemon = async (id) => {
-    const getApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
-    if (!getApi) throw Error(`No existe Pokémon con el id: ${id}`)
-    const resultsApi = {
+    try{
+        const getDB = await Pokemon.findAll();
+        const findPokemon = getDB.find(pokemon => pokemon.id == id);
+        if (findPokemon) return findPokemon;
+
+        const getApi = await axios.get(`https://pokeapi.co/api/v2/pokemon/${id}`);
+        const resultsApi = {
             id: getApi.data.id,
             name: getApi.data.name,
-            image: getApi.data.sprites.front_default,
-            life: getApi.data.stats[0].base_stat,
+            image: getApi.data.sprites.other.dream_world.front_default,
+            hp: getApi.data.stats[0].base_stat,
             attack: getApi.data.stats[1].base_stat,
             defense: getApi.data.stats[2].base_stat,
             speed: getApi.data.stats[5].base_stat,
             height: getApi.data.height,
             weight: getApi.data.weight,
             type: (getApi.data.types.map(tipo => tipo.type.name)).join(",")
-    };
-    return resultsApi;
+        };
+
+        return resultsApi;
+
+    } catch (error) {
+        throw Error(`No se encontro pokémon con el id: ${id}`)
+    }  
 };
 
-const addPokemon = async (name , image , life , attack , defense , speed , height , weight , type) =>{
+const addPokemon = async (name , image , hp , attack , defense , speed , height , weight , type) =>{
     if (!name || !image || !life || !attack || !defense) throw Error("Faltan datos a completar");
-    const newPokemon = await Pokemon.create({name, image , life , attack , defense , speed , height , weight});
-    const findType = await Type.findAll({
-        where:{
-            name: {
-                [Op.like]:type
-            }
-        }
-    });
+    const newPokemon = await Pokemon.create({name, image , hp , attack , defense , speed , height , weight});
+    const findType = await Type.findOne({where:{name:type}});
     await newPokemon.addType(findType);
     return newPokemon;
 };
 
 const getTypes = async () => {
-    const types = await axios.get("https://pokeapi.co/api/v2/type");
-    const resultsApi = types.data.results.map(data => data.name);
-    // await Type.bulkCreate(resultsApi)
-    resultsApi.forEach(tipo => Type.findOrCreate({
-        where:{
-            name: tipo
-        }
-    }));
-    const typeDB = await Type.findAll();
-    return typeDB;
+    const callDB = await Type.findAll()
+    if (!callDB.length){
+        const apiTypes = await axios.get("https://pokeapi.co/api/v2/type");
+        const resultTypes = apiTypes.data.results.map(type => ({ name: type.name }));
+        await Type.bulkCreate(resultTypes);
+        const typesDB = await Type.findAll();
+        return typesDB;
+    } else {
+        return callDB;
+    }
 }
 
 module.exports = {

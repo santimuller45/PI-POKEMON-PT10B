@@ -1,0 +1,27 @@
+.backGround{
+    background-image: url("../../source/pokeball-1280.png");
+    background-size: contain;
+    background-position: center;
+    background-repeat:no-repeat;
+    height: 98vh;
+    width: 95vw;
+}
+.title {
+    position: absolute;
+    top: 8%;
+    left: 30%;
+    font-size: 70px;
+    font-family: fantasy;
+}
+.buttonHome {
+    position: absolute;
+    top: 50%;
+    right: 20%;
+    font-size: 50px;
+    border-radius: 15px;
+    border: solid black;
+}
+.text{
+    color: red;
+    font-family: fantasy;
+}
