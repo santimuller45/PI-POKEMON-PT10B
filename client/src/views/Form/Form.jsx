@@ -1,14 +1,20 @@
-import React, { useEffect , useState } from "react";
+import React from "react";
 import styles from "./Form.module.css"
+import { useEffect , useState } from "react";
 import { useDispatch , useSelector } from "react-redux";
 import { getTypes } from "../../components/redux/actions";
+import validate from "./validation/validation";
 
 function Form () {
 
     const dispatch = useDispatch();
     const types = useSelector(state => state.allTypes)
 
-    const [form , setForm] = useState ({
+    useEffect(() => {
+        dispatch(getTypes())
+    })
+
+    const [pokeData , setPokeData] = useState ({
         name:"",
         hp:"",
         attack:"",
@@ -26,21 +32,28 @@ function Form () {
         speed:"",
         height:"",
         weight:""
-    })
+    });
 
     const handlerInputChange = (e) => {
-        setForm({
-            ...form,
+        setPokeData({
+            ...pokeData,
             [e.target.name]: e.target.value
         });
-    }
+
+        setErrors(
+            validate({
+                ...pokeData,
+                [e.target.name]:e.target.value
+            })
+        )
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
+        if (!pokeData.name || !pokeData.hp || !pokeData.attack || !pokeData.defense) {
+            alert("Debes completar los campos obligatorios")
+        }
     }
-
-    useEffect(() => {
-        dispatch(getTypes())
-    })
 
     return(
         <form className={styles.container} onSubmit={handleSubmit}>
@@ -48,58 +61,58 @@ function Form () {
                 <input
                     name="name"
                     placeholder="Name here..."
-                    type="text"
-                    value={form.name}
+                    value={pokeData.name}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.name}</p>
                 <label>HP *</label>
                 <input
                     name="hp"
                     placeholder="HP here..."
-                    type="text"
-                    value={form.hp}
+                    value={pokeData.hp}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.hp}</p>
                 <label>Attack *</label>
                 <input
                     name="attack"
                     placeholder="Attack here..."
-                    type="text"
-                    value={form.attack}
+                    value={pokeData.attack}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.attack}</p>
                 <label>Defense *</label>
                 <input
                     name="defense"
                     placeholder="Defense here..."
-                    type="text"
-                    value={form.defense}
+                    value={pokeData.defense}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.defense}</p>
                 <label>Speed</label>
                 <input
                     name="speed"
                     placeholder="Speed here..."
-                    type="text"
-                    value={form.speed}
+                    value={pokeData.speed}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.speed}</p>
                 <label>Height</label>
                 <input
                     name="height"
                     placeholder="Height here..."
-                    type="text"
-                    value={form.height}
+                    value={pokeData.height}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.height}</p>
                 <label>Weight</label>
                 <input
                     name="weight"
                     placeholder="Weight here..."
-                    type="text"
-                    value={form.weight}
+                    value={pokeData.weight}
                     onChange={handlerInputChange}
                 />
+                <p>{errors.weight}</p>
                 <select>
                     {types
                         ? types.map(type => (
@@ -108,7 +121,7 @@ function Form () {
                         : null 
                     }
                 </select>
-            <button>Enviar</button>
+            <button type="submit">Enviar</button>
         </form>
     )
 }

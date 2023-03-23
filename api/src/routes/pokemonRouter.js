@@ -31,8 +31,8 @@ pokemonRouter.get("/:idPokemon", async (req,res) => {
 
 pokemonRouter.post("/", async (req,res) => {
     try {
-        const { name , image , life , attack , defense , speed , height , weight , type } = req.body;
-        const newPokemon = await addPokemon( name, image , life , attack , defense , speed , height , weight , type);
+        const { name , image , hp , attack , defense , speed , height , weight , type } = req.body;
+        const newPokemon = await addPokemon( name, image , hp , attack , defense , speed , height , weight , type);
         res.status(200).json(newPokemon);
     } catch(error) {
         res.status(400).send(error.message);

@@ -4,5 +4,9 @@
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 1.5em
+    gap: 1em
+}
+
+p{
+    color: red;
 }

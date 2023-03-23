@@ -81,7 +81,7 @@ const getIdPokemon = async (id) => {
 };
 
 const addPokemon = async (name , image , hp , attack , defense , speed , height , weight , type) =>{
-    if (!name || !image || !life || !attack || !defense) throw Error("Faltan datos a completar");
+    if (!name || !image || !hp || !attack || !defense) throw Error("Faltan datos a completar");
     const newPokemon = await Pokemon.create({name, image , hp , attack , defense , speed , height , weight});
     const findType = await Type.findOne({where:{name:type}});
     await newPokemon.addType(findType);
