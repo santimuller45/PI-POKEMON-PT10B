@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Detail.module.css"
 import { useParams } from "react-router-dom";
+import defaultImg from "../../source/icoPokeball.png"
 
 function Detail () {
 
@@ -17,7 +18,10 @@ function Detail () {
         <div>
             {pokemon ? pokemon.map(info => (
                 <div key={info.id} className={styles.container}>
-                    <img src={info.image} alt={info.id} className={styles.image}/>
+                    {info.image === "default" 
+                        ? <img src={defaultImg} alt={info.id} className={styles.image}/>
+                        : <img src={info.image} alt={info.id} className={styles.image}/>
+                    }
                     <div className={styles.stats}>
                         <h1> {info.name}</h1>
                         <div>HP: {info.hp}</div>
@@ -35,7 +39,7 @@ function Detail () {
                             ? <div>WEIGHT: {info.weight}</div>
                             : null
                         }
-                        <div>TYPE: {info.type}</div>
+                        <div>TYPE: {(info.types.map(elem => elem.name ? elem.name : elem)).join(",")}</div>
                     </div>
                 </div>
             ))

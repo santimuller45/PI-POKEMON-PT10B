@@ -22,7 +22,7 @@ function CardContainer () {
                     speed={data.speed}
                     height={data.height}
                     weight={data.weight}
-                    type={data.type}
+                    types={data.types}
                 />
             ))}
         </div>

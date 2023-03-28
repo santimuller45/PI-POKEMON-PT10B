@@ -4,6 +4,7 @@ import { useEffect , useState } from "react";
 import { useDispatch , useSelector } from "react-redux";
 import { getTypes } from "../../components/redux/actions";
 import validate from "./validation/validation";
+import axios from "axios";
 
 function Form () {
 
@@ -16,12 +17,14 @@ function Form () {
 
     const [pokeData , setPokeData] = useState ({
         name:"",
+        image:"default",
         hp:"",
         attack:"",
         defense:"",
         speed:"",
         height:"",
-        weight:""
+        weight:"",
+        type:"normal"
     });
 
     const [errors , setErrors] = useState({
@@ -50,9 +53,8 @@ function Form () {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (!pokeData.name || !pokeData.hp || !pokeData.attack || !pokeData.defense) {
-            alert("Debes completar los campos obligatorios")
-        }
+        axios.post("http://localhost:3001/pokemons", pokeData)
+            .then(res => alert("creado exitosamente"))
     }
 
     return(

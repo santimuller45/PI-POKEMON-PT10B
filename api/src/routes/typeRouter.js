@@ -8,7 +8,7 @@ typeRouter.get("/" , async (req,res) => {
         const typesApi = await getTypes();
         res.status(200).json(typesApi);
     } catch (error) {
-        res.status(400).send(error.message);
+        res.status(400).json({error:error.message});
     }
 });
 
