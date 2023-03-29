@@ -2,6 +2,7 @@ import axios from "axios";
 
 export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
+export const ORDER_CARDS = "ORDER_CARDS";
 
 export const getPokemons = () => {
     return async function(dispatch) {
@@ -22,5 +23,12 @@ export const getTypes = () => {
             type: GET_TYPES,
             payload: types
         })
+    }
+};
+
+export const orderCards = (condition) => {
+    return {
+        type: ORDER_CARDS,
+        payload: condition
     }
 }

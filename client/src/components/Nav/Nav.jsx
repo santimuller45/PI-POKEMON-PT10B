@@ -1,6 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./Nav.module.css"
+import OrderBy from "../OrderBy/OrderBy.jsx";
 
 function Nav () {
 
@@ -11,6 +12,9 @@ function Nav () {
             </div>
             <div>
                 <Link to="/form" className={styles.text}>Create Pokémon</Link>
+            </div>
+            <div>
+                <OrderBy/>
             </div>
         </div>
     )
