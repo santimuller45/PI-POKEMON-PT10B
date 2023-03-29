@@ -5,15 +5,17 @@ import { useDispatch , useSelector } from "react-redux";
 import { getTypes } from "../../components/redux/actions";
 import validate from "./validation/validation";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 function Form () {
 
     const dispatch = useDispatch();
-    const types = useSelector(state => state.allTypes)
+    const types = useSelector(state => state.allTypes);
+    const navigate = useNavigate();
 
     useEffect(() => {
         dispatch(getTypes())
-    })
+    },[dispatch])
 
     const [pokeData , setPokeData] = useState ({
         name:"",
@@ -24,7 +26,7 @@ function Form () {
         speed:"",
         height:"",
         weight:"",
-        type:"normal"
+        type: []
     });
 
     const [errors , setErrors] = useState({
@@ -48,14 +50,33 @@ function Form () {
                 ...pokeData,
                 [e.target.name]:e.target.value
             })
-        )
+        );
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
         axios.post("http://localhost:3001/pokemons", pokeData)
-            .then(res => alert("creado exitosamente"))
+            .then(res => {
+                alert("creado exitosamente");
+                navigate("/home");
+            })
     }
+
+    const handleCheckBox = (e) => {
+        const { name , checked } = e.target;
+        if(checked) {
+            setPokeData({
+                ...pokeData,
+                type: [...pokeData.type, name]
+            })
+        } else {
+            const result = pokeData.type.filter(elem => elem !== name)
+            setPokeData({
+                ...pokeData,
+                type: result
+            })
+        }
+    };
 
     return(
         <form className={styles.container} onSubmit={handleSubmit}>
@@ -115,15 +136,24 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.weight}</p>
-                <select>
-                    {types
-                        ? types.map(type => (
-                            <option>{type.name}</option>
+                <div>
+                    {types 
+                        ? types.map(tipo => (
+                            <label key={tipo.id} htmlFor={tipo.id}>
+                                <input
+                                    type="checkbox"
+                                    id={tipo.id}
+                                    name={tipo.name}
+                                    checked={pokeData.type.includes(tipo.name)}
+                                    onChange={handleCheckBox}
+                                />
+                                {tipo.name}  
+                            </label>
                         ))
-                        : null 
+                        : null
                     }
-                </select>
-            <button type="submit">Enviar</button>
+                </div>
+            <button type="submit">Submit</button>
         </form>
     )
 }

@@ -10,7 +10,7 @@ function Nav () {
                 <Link to="/home" className={styles.text}>Home</Link>
             </div>
             <div>
-                <Link to="/form" className={styles.text}>Crear Pokémon</Link>
+                <Link to="/form" className={styles.text}>Create Pokémon</Link>
             </div>
         </div>
     )
