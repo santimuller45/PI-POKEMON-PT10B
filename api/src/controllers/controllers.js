@@ -47,7 +47,6 @@ const getNextPage = async (nextUrl) => {
 }
 
 const getQuery = async (name) => {
-    try {
         const pokemonName = name.toLowerCase();
 
         //BUSCO EN LA DATABASE Y SI LO ENCUENTRA LO RETORNA
@@ -59,11 +58,7 @@ const getQuery = async (name) => {
         const getApi = (await axios.get(`https://pokeapi.co/api/v2/pokemon/${pokemonName}`)).data;
         const pokemonApi = infoPokemon(getApi)
 
-        return pokemonApi;
-
-    } catch (error) {
-        throw Error(`No se encontro Pokémon con el nombre: ${name}`)
-    } 
+        return [pokemonApi];
 };
 
 const getIdPokemon = async (id) => {
@@ -87,7 +82,7 @@ const getIdPokemon = async (id) => {
     }  
 };
 
-const addPokemon = async ( name , image, hp , attack , defense , speed , height , weight , type ) =>{
+const addPokemon = async ( name , image, hp , attack , defense , speed , height , weight, type ) => {
     if ( !name ||!image ||  !hp || !attack || !defense) throw Error("Faltan datos a completar");
     const newPokemon = await Pokemon.create({ name, image , hp , attack , defense , speed , height , weight});
     const findType = await Type.findAll({ where : { name : type }});

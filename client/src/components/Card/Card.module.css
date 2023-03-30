@@ -18,8 +18,10 @@
 .cardName{
     font-family:Arial, Helvetica, sans-serif;
     font-size: 40px;
+    color:black
 }
 .cardType{
     font-size: 20px;
     font-family: Arial, Helvetica, sans-serif;
+    color: black;
 }

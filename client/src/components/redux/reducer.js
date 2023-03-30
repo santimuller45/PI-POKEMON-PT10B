@@ -1,4 +1,4 @@
-import { GET_POKEMONS , GET_TYPES , ORDER_CARDS } from "./actions.js";
+import { GET_POKEMONS , GET_TYPES , ORDER_CARDS , SEARCH } from "./actions.js";
 
 const initialState = {
     allPokemons: [],
@@ -7,7 +7,7 @@ const initialState = {
 
 function reducerPokemon(state = initialState , actions) {
     switch(actions.type) {
-        case GET_POKEMONS: {
+        case GET_POKEMONS:{
             return {
                 ...state,
                 allPokemons: actions.payload
@@ -17,6 +17,12 @@ function reducerPokemon(state = initialState , actions) {
             return {
                 ...state,
                 allTypes: actions.payload
+            }
+        }
+        case SEARCH:{
+            return {
+                ...state,
+                allPokemons: actions.payload
             }
         }
         case ORDER_CARDS: {
@@ -30,8 +36,14 @@ function reducerPokemon(state = initialState , actions) {
                     if ((elemA.name).toUpperCase() < (elemB.name).toUpperCase()) return 1;
                     if ((elemB.name).toUpperCase() < (elemA.name).toUpperCase()) return -1;
                     return 0;
+                } else if (actions.payload === "> Attack") {
+                    if (elemA.attack < elemB.attack) return 1;
+                    if (elemB.attack < elemA.attack) return -1;
+                    return 0;
                 } else {
-                    return [...state.allPokemons]
+                    if (elemA.attack < elemB.attack) return -1;
+                    if (elemB.attack < elemA.attack) return 1;
+                    return 0;
                 }
             });
 

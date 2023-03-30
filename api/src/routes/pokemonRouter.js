@@ -10,7 +10,7 @@ pokemonRouter.get("/", async (req,res) => {
         const resultData = name ? await getQuery(name) : await getPokemons() 
         return res.status(200).json(resultData);
     } catch (error) {
-        res.status(400).json({error:error.message});
+        res.status(400).json({error:"No se encontro un Pokémon con ese nombre"});
     }
 });
 

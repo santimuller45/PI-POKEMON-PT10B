@@ -9,14 +9,14 @@ function Card ({ id , image , name , types }) {
 
     return(
         <div className={styles.card}>
-            { image === "default"
-                ?  <img src={defaultImg} alt={id} className={styles.cardImage}/>
-                : <img src={image} alt={id} className={styles.cardImage}/>
-            }
             <Link to={`/detail/${id}`}>
-                <h2 className={styles.cardName} >{name}</h2>
+                { image === "default"
+                    ?  <img src={defaultImg} alt={id} className={styles.cardImage}/>
+                    : <img src={image} alt={id} className={styles.cardImage}/>
+                }
             </Link>
-            <div className={styles.cardType}>{type}</div>
+                <h2 className={styles.cardName} >{name}</h2>
+                <div className={styles.cardType}>{type}</div>
         </div>
     )
 }
