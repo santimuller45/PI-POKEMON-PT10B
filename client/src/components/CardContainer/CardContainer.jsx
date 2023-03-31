@@ -1,16 +1,12 @@
 import React from "react";
 import Card from "../Card/Card.jsx";
 import styles from "./CardContainer.module.css"
-import { useSelector } from "react-redux";
 
-function CardContainer () {
-
-    // const { pokemon } = props;
-    const pokemon = useSelector(state => state.allPokemons)
+function CardContainer ({ currentPokemons }) {
 
     return(
         <div className={styles.container}>
-            {pokemon.map(data => (
+            {currentPokemons.map(data => (
                 <Card
                     key={data.id}
                     id={data.id}

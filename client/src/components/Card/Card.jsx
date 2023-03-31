@@ -1,7 +1,7 @@
 import React from "react";
 import styles from "./Card.module.css";
 import { Link } from "react-router-dom";
-import defaultImg from "../../source/icoPokeball.png"
+import defaultImg from "../../source/pokeball.png"
 
 function Card ({ id , image , name , types }) {
 

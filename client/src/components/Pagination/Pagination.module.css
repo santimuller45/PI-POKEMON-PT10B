@@ -1,0 +1,35 @@
+.paginado {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    list-style: none;
+    margin: 1rem 0;
+}
+  
+.num {
+    margin: 0 0.5rem;
+}
+  
+button {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    color: #000;
+    transition: all 0.2s ease-in-out;
+}
+  
+button:hover,
+button:focus {
+    background-color: #f5f5f5;
+    outline: none;
+}
+  
+.currentPage {
+    font-weight: bold;
+}
+  
+  
+  
+  
