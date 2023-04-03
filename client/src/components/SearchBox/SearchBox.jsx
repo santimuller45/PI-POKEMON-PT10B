@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { searchPokemon } from "../redux/actions";
 
-function SearchBox () {
+function SearchBox ({ setCurrentPage }) {
 
     const dispatch = useDispatch();
     const [ pokemon , setPokemon ] = useState("");
@@ -14,8 +14,9 @@ function SearchBox () {
     }
 
     const handleSearch = () => {
-        dispatch(searchPokemon(pokemon))
-        setPokemon("")
+        dispatch(searchPokemon(pokemon));
+        setCurrentPage(1);
+        setPokemon("");
     }
 
     return (

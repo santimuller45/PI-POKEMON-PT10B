@@ -4,6 +4,8 @@ export const GET_POKEMONS = "GET_POKEMONS";
 export const GET_TYPES = "GET_TYPES";
 export const SEARCH = "SEARCH";
 export const ORDER_CARDS = "ORDER_CARDS";
+export const FILTER_BY_SOURCE = "FILTER_BY_SOURCE";
+export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 
 export const getPokemons = () => {
     return async function(dispatch) {
@@ -33,11 +35,25 @@ export const searchPokemon = (pokeName) => {
             payload: pokemon
         })
     }
-}
+};
 
 export const orderCards = (condition) => {
     return {
         type: ORDER_CARDS,
+        payload: condition
+    }
+};
+
+export const filterSource = (condition) => {
+    return {
+        type: FILTER_BY_SOURCE,
+        payload: condition
+    }
+};
+
+export const filterType = (condition) => {
+    return {
+        type: FILTER_BY_TYPE,
         payload: condition
     }
 }
