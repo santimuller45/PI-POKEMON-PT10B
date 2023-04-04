@@ -6,7 +6,6 @@ function Nav () {
 
     return(
         <nav className={styles.nav}>
-            <Link to="/home" className={styles.text}>Home</Link>
             <Link to="/form" className={styles.text}>New Pokémon</Link>
         </nav>
     )

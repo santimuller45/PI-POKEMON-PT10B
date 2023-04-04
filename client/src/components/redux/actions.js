@@ -1,6 +1,7 @@
 import axios from "axios";
 
 export const GET_POKEMONS = "GET_POKEMONS";
+export const DETAIL_POKEMON = "DETAIL_POKEMON";
 export const GET_TYPES = "GET_TYPES";
 export const SEARCH = "SEARCH";
 export const ORDER_CARDS = "ORDER_CARDS";
@@ -15,6 +16,16 @@ export const getPokemons = () => {
             payload: pokemons
         });
     };
+};
+
+export const detailPokemon = (id) => {
+    return async function(dispatch) {
+        const detail = (await axios.get(`http://localhost:3001/pokemons/${id}`)).data;
+        dispatch({
+            type: DETAIL_POKEMON,
+            payload: detail
+        })
+    }
 };
 
 export const getTypes = () => {
@@ -56,4 +67,4 @@ export const filterType = (condition) => {
         type: FILTER_BY_TYPE,
         payload: condition
     }
-}
+};

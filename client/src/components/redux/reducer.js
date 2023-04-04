@@ -1,27 +1,34 @@
-import { GET_POKEMONS , GET_TYPES , ORDER_CARDS , SEARCH , FILTER_BY_SOURCE , FILTER_BY_TYPE } from "./actions.js";
+import { GET_POKEMONS , GET_TYPES , ORDER_CARDS , SEARCH , FILTER_BY_SOURCE , FILTER_BY_TYPE, DETAIL_POKEMON } from "./actions.js";
 
 const initialState = {
     allPokemons: [],
     pokemons: [],
+    detail: [],
     allTypes: []
 }
 
 function reducerPokemon(state = initialState , actions) {
     switch(actions.type) {
-        case GET_POKEMONS:{
+        case GET_POKEMONS: {
             return {
                 ...state,
                 pokemons: actions.payload,
                 allPokemons: actions.payload
             }
         }
-        case GET_TYPES:{
+        case DETAIL_POKEMON: {
+            return {
+                ...state,
+                detail: actions.payload
+            }
+        }
+        case GET_TYPES: {
             return {
                 ...state,
                 allTypes: actions.payload
             }
         }
-        case SEARCH:{
+        case SEARCH: {
             return {
                 ...state,
                 pokemons: actions.payload

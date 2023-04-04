@@ -1,49 +1,55 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import styles from "./Detail.module.css"
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import defaultImg from "../../source/pokeball.png"
+import { useDispatch, useSelector } from "react-redux";
+import { detailPokemon } from "../../components/redux/actions.js";
 
 function Detail () {
 
     const { idPokemon } = useParams();
-    const [pokemon , setPokemon] = useState([]);
-
+    const pokemon = useSelector(state => state.detail)
+    const dispatch = useDispatch();
+    const navigate = useNavigate();
+    
     useEffect(() => {
-        fetch(`http://localhost:3001/pokemons/${idPokemon}`)
-            .then((response) => response.json())
-            .then((data) => setPokemon([data]))
-    },[idPokemon]);
+        dispatch(detailPokemon(idPokemon))
+    },[dispatch,idPokemon]);
+    
+    const handleBackButton = () => {
+        navigate("/home")
+    }
 
     return(
         <div>
-            {pokemon ? pokemon.map(info => (
-                <div key={info.id} className={styles.container}>
-                    {info.image === "default" 
-                        ? <img src={defaultImg} alt={info.id} className={styles.image}/>
-                        : <img src={info.image} alt={info.id} className={styles.image}/>
+            <button onClick={handleBackButton} className={styles.buttonBack}>Back</button>
+            {pokemon ?
+                <div className={styles.container}>
+                    {pokemon.image === "default" 
+                        ? <img src={defaultImg} alt={pokemon.id} className={styles.image}/>
+                        : <img src={pokemon.image} alt={pokemon.id} className={styles.image}/>
                     }
                     <div className={styles.stats}>
-                        <h1> {info.name}</h1>
-                        <div>HP: {info.hp}</div>
-                        <div>ATTACK: {info.attack}</div>
-                        <div>DEFENSE: {info.defense}</div>
-                        {info.speed 
-                            ? <div>SPEED: {info.speed}</div>
+                        <h1> {pokemon.name}</h1>
+                        <div>HP: {pokemon.hp}</div>
+                        <div>ATTACK: {pokemon.attack}</div>
+                        <div>DEFENSE: {pokemon.defense}</div>
+                        {pokemon.speed 
+                            ? <div>SPEED: {pokemon.speed}</div>
                             : null
                         }
-                        {info.height 
-                            ? <div>HEIGHT: {info.height}</div>
+                        {pokemon.height 
+                            ? <div>HEIGHT: {pokemon.height}</div>
                             : null
                         }
-                        {info.weight 
-                            ? <div>WEIGHT: {info.weight}</div>
+                        {pokemon.weight 
+                            ? <div>WEIGHT: {pokemon.weight}</div>
                             : null
                         }
-                        <div>TYPE: {(info.types.map(elem => elem.name ? elem.name : elem)).join(",")}</div>
+                        <div>TYPE: {pokemon.types?.map(elem => elem.name ? elem.name : elem).join(",")}</div>
                     </div>
                 </div>
-            ))
-            : null
+            : <h1>Loading...</h1>
             }
         </div>
     )

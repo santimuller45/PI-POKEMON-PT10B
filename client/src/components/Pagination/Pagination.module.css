@@ -10,7 +10,7 @@
     margin: 0 0.5rem;
 }
   
-button {
+.buttonPage {
     border: none;
     background-color: transparent;
     font-size: 1rem;
@@ -20,8 +20,8 @@ button {
     transition: all 0.2s ease-in-out;
 }
   
-button:hover,
-button:focus {
+.buttonPage:hover,
+.buttonPage:focus {
     background-color: #f5f5f5;
     outline: none;
 }

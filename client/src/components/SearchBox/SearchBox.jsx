@@ -9,11 +9,12 @@ function SearchBox ({ setCurrentPage }) {
     const dispatch = useDispatch();
     const [ pokemon , setPokemon ] = useState("");
 
-    const handleInput = (e) => {    
+    const handleInput = (e) => {
         setPokemon([e.target.value])
     }
 
-    const handleSearch = () => {
+    const handleSearch = (e) => {
+        e.preventDefault();
         dispatch(searchPokemon(pokemon));
         setCurrentPage(1);
         setPokemon("");
