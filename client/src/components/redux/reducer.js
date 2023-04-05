@@ -12,8 +12,9 @@ function reducerPokemon(state = initialState , actions) {
         case GET_POKEMONS: {
             return {
                 ...state,
+                allPokemons: actions.payload,
                 pokemons: actions.payload,
-                allPokemons: actions.payload
+                detail: []
             }
         }
         case DETAIL_POKEMON: {

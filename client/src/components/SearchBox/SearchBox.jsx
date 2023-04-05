@@ -21,17 +21,16 @@ function SearchBox ({ setCurrentPage }) {
     }
 
     return (
-        <>
+        <div className={styles.searchContainer}>
             <input
-                className={styles.container}
                 placeholder="Search Pokémon..."
                 name="name"
                 type="text"
                 value={pokemon}
                 onChange={handleInput}
             />
-            <button className={styles.container} onClick={handleSearch}>Search</button>
-        </> 
+            <button onClick={handleSearch}>Search</button>
+        </div> 
     )
 }
 

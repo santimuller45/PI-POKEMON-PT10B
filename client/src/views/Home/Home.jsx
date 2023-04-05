@@ -51,8 +51,8 @@ function Home () {
     return(
         <div className={styles.backGround}>
             <nav className={styles.box}>
-                <button onClick={reloadPage}>Refresh Pokémons</button>
-                <div>ORDER BY:
+                <button onClick={reloadPage} className={styles.refresh}>Refresh Pokémons</button>
+                <div>Order:
                     <select onChange={handleOrder}>
                         <option value="none"> None </option>
                         <option value="A-Z"> A-Z </option>
@@ -61,14 +61,14 @@ function Home () {
                         <option value="< Attack"> Lowest Attack </option>
                     </select>
                 </div>
-                <div>FILTER BY:
+                <div>Filter:
                     <select onChange={handleSource}>
                         <option value="all">All</option>
                         <option value="api">API</option>
                         <option value="db">DB</option>
                     </select>
                 </div>
-                <div>TYPE:
+                <div>Type:
                     <select onChange={handleType}>
                         <option value="all">All</option>
                         {allTypes.map(elem => (

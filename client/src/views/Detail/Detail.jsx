@@ -21,9 +21,9 @@ function Detail () {
     }
 
     return(
-        <div>
+        <div className={styles.backGround}>
             <button onClick={handleBackButton} className={styles.buttonBack}>Back</button>
-            {pokemon ?
+            {pokemon.id ?
                 <div className={styles.container}>
                     {pokemon.image === "default" 
                         ? <img src={defaultImg} alt={pokemon.id} className={styles.image}/>
@@ -49,7 +49,7 @@ function Detail () {
                         <div>TYPE: {pokemon.types?.map(elem => elem.name ? elem.name : elem).join(",")}</div>
                     </div>
                 </div>
-            : <h1>Loading...</h1>
+            : <h1 className={styles.load}>Loading...</h1>
             }
         </div>
     )

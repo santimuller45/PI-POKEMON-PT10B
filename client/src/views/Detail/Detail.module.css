@@ -1,14 +1,21 @@
+/* .backGround {
+  background-color: beige;
+  background-size: cover;
+  height: 97vh;
+  width: 99vw;
+} */
+
 .container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
     margin-top: 20px;
-  }
+}
 
 .image {
-    width: 40vw;
-    height: 40vh;
+    width: 50vw;
+    height: 50vh;
     object-fit: contain;
     margin-right: 20px;
 }
@@ -18,11 +25,11 @@
     flex-direction: column;
     align-items: flex-start;
     margin-top: 20px;
-    font-size: 1.2rem;
+    font-size: 2.2rem;
 }
   
 .stats h1 {
-    font-size: 2rem;
+    font-size: 8rem;
     margin-bottom: 10px;
 }
   
@@ -30,41 +37,32 @@
     margin-top: 10px;
 }
 
-.buttonBack {
-    position: absolute;
-    top: 25%;
-    left: 15%;
-    background-color: #f1f1f1;
-    border: none;
-    color: #333;
-    text-align: center;
-    text-decoration: none;
-    font-size: 6rem;
-    cursor: pointer;
-  }
-  
-.buttonBack:hover {
-    background-color: #ddd;
+.load {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  font-size: 50px;
 }
-/* .buttonBack {
-    background-color: #F44336;
+.buttonBack {
+    background-color: #d81c1c;
     border: none;
     color: #fff;
     padding: 10px 20px;
     text-align: center;
     text-decoration: none;
-    display: inline-block;
-    font-size: 1.2rem;
-    margin-top: 20px;
+    position: absolute;
+    font-size: 8rem;
+    font-family: fantasy;
+    top: 40%;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: 50px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease-in-out;
   }
   
   .buttonBack:hover {
-    background-color: #D32F2F;
-  } */
+    background-color: #f7e81a;
+  }
   
   
   

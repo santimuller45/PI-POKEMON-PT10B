@@ -16,7 +16,7 @@
 }
   
 .card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-25px);
 }
   
 .card a {
@@ -32,12 +32,12 @@
 }
   
 .cardName {
-    font-size: 1.2rem;
+    font-size: 2rem;
     margin-top: 10px;
 }
   
 .cardType {
-    font-style: italic;
-    color: #666;
+    font-family:fantasy;
+    color: #333;
     margin-top: 5px;
 }
