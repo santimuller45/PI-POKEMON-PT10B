@@ -1,3 +1,7 @@
+body{
+    margin: 0;
+    padding: 0;
+}
 .backGround{
     background-image: url("../../source/background.jpg");
     background-size: cover;
