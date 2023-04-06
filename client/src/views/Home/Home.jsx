@@ -6,6 +6,7 @@ import { useEffect } from "react";
 import { useSelector , useDispatch } from "react-redux";
 import { getPokemons, getTypes , orderCards , filterSource , filterType } from "../../components/redux/actions.js";
 import SearchBox from "../../components/SearchBox/SearchBox.jsx";
+import Nav from "../../components/Nav/Nav.jsx";
 
 function Home () {
 
@@ -50,7 +51,8 @@ function Home () {
 
     return(
         <div className={styles.backGround}>
-            <nav className={styles.box}>
+            <Nav/>
+            <nav className={styles.displayBar}>
                 <button onClick={reloadPage} className={styles.refresh}>Refresh Pokémons</button>
                 <div>Order:
                     <select onChange={handleOrder}>

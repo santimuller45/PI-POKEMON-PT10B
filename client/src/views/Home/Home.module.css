@@ -1,19 +1,23 @@
-.box{
+.displayBar{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 2em;
     justify-content:center;
     align-items: center;
-    margin: 1em;
+    border: solid black 3px;
+    border-radius: 15px;
+    background-color: #616161;
+    padding: 0.5%;
+    margin: 1%;
 }
 
-.box div {
+.displayBar div {
     font-size: 25px;
     font-family:fantasy;
 }
 
-.box select {
+.displayBar select {
     font-size: 20px;
 }
 

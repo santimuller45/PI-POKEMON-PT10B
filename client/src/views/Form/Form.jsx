@@ -79,7 +79,10 @@ function Form () {
     };
 
     return(
-        <form className={styles.container} onSubmit={handleSubmit}>
+        <div>
+            <button className={styles.buttonBack} onClick={() => navigate(-1)}>Back</button>
+            <form className={styles.container} onSubmit={handleSubmit}>
+                {/* LABEL INPUT NAME */}
                 <label>Name *</label>
                 <input
                     name="name"
@@ -88,6 +91,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.name}</p>
+                {/* LABEL INPUT HP */}
                 <label>HP *</label>
                 <input
                     name="hp"
@@ -96,6 +100,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.hp}</p>
+                {/* LABEL INPUT ATTACK */}
                 <label>Attack *</label>
                 <input
                     name="attack"
@@ -104,6 +109,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.attack}</p>
+                {/* LABEL INPUT DEFENSE */}
                 <label>Defense *</label>
                 <input
                     name="defense"
@@ -112,6 +118,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.defense}</p>
+                {/* LABEL INPUT SPEED */}
                 <label>Speed</label>
                 <input
                     name="speed"
@@ -120,6 +127,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.speed}</p>
+                {/* LABEL INPUT HEIGHT */}
                 <label>Height</label>
                 <input
                     name="height"
@@ -128,6 +136,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.height}</p>
+                {/* LABEL INPUT WEIGHT */}
                 <label>Weight</label>
                 <input
                     name="weight"
@@ -136,6 +145,7 @@ function Form () {
                     onChange={handlerInputChange}
                 />
                 <p>{errors.weight}</p>
+                {/* CHECKBOX TIPOS */}
                 <div>
                     {types 
                         ? types.map(tipo => (
@@ -149,12 +159,13 @@ function Form () {
                                 />
                                 {tipo.name}  
                             </label>
-                        ))
-                        : null
+                            ))
+                            : null
                     }
                 </div>
-            <button type="submit">Submit</button>
-        </form>
+                <button type="submit">Submit</button>
+            </form>
+        </div>
     )
 }
 

@@ -1,29 +1,31 @@
-import React, { useEffect } from "react";
+import React, { useEffect , useState} from "react";
 import styles from "./Detail.module.css"
 import { useNavigate, useParams } from "react-router-dom";
 import defaultImg from "../../source/pokeball.png"
 import { useDispatch, useSelector } from "react-redux";
 import { detailPokemon } from "../../components/redux/actions.js";
+import Loading from "../../components/Loading/Loading.jsx";
 
 function Detail () {
 
     const { idPokemon } = useParams();
     const pokemon = useSelector(state => state.detail)
+    const [pokemonDetail , setPokemonDetail] = useState({})
     const dispatch = useDispatch();
     const navigate = useNavigate();
     
     useEffect(() => {
         dispatch(detailPokemon(idPokemon))
-    },[dispatch,idPokemon]);
+        setTimeout(() => {
+            setPokemonDetail(pokemon)
+        }, 1000);
+    },[dispatch,idPokemon,pokemon]);
     
-    const handleBackButton = () => {
-        navigate("/home")
-    }
 
     return(
         <div className={styles.backGround}>
-            <button onClick={handleBackButton} className={styles.buttonBack}>Back</button>
-            {pokemon.id ?
+            <button onClick={() => navigate(-1)} className={styles.buttonBack}>Back</button>
+            {pokemonDetail.id ?
                 <div className={styles.container}>
                     {pokemon.image === "default" 
                         ? <img src={defaultImg} alt={pokemon.id} className={styles.image}/>
@@ -49,7 +51,7 @@ function Detail () {
                         <div>TYPE: {pokemon.types?.map(elem => elem.name ? elem.name : elem).join(",")}</div>
                     </div>
                 </div>
-            : <h1 className={styles.load}>Loading...</h1>
+            : <Loading/>
             }
         </div>
     )

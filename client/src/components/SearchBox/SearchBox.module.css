@@ -12,13 +12,17 @@
 }
 
 .searchContainer button{
-    background-color: #d81c1c;
+    background-color: #000;
     border: none;
     color: #fff;
-    padding: 5px 5px;
+    padding: 7px 7px;
     font-size: 1rem;
     cursor: pointer;
-    border-radius: 10%;
+    border-radius: 15%;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
     transition: background-color 0.3s ease-in-out;
+}
+.searchContainer button:hover{
+    background-color: #fff;
+    color: #000;
 }
