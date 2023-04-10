@@ -39,28 +39,32 @@ const infoPokemon = (data) => {
 
 const getPokemons = async () => {
     const pokemonsDB = await Pokemon.findAll({ include : { model : Type }});
-    const apiData = (await axios.get("https://pokeapi.co/api/v2/pokemon")).data;
-    const pokemonUrls = apiData.results.map(pokemon => pokemon.url);
 
-    //ejecuto la función getNextPage para obtener 20 pokémons más y los agrego a una nueva var allPokemonsUrls
-    const nextPageUrls = await getNextPage(apiData.next);
-    const allPokemonsUrls = [...pokemonUrls, ...nextPageUrls];
+    // Realizo la primera solicitud a la API para obtener los primeros 20 pokémon
+    const apiData = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data;
+    let pokemonUrls = apiData.results.map(pokemon => pokemon.url);
+
+    // Realizo 7 solicitudes más para obtener más pokémon
+    let nextPageUrl = apiData.next;
+    for (let i = 0; i < 7; i++) {
+        const nextPageData = (await axios.get(nextPageUrl)).data;
+        const nextPageUrls = nextPageData.results.map(pokemon => pokemon.url);
+        pokemonUrls.push(...nextPageUrls);
+        nextPageUrl = nextPageData.next;
+    }
+
+    //Reduce a 151 pokemons para obtener los de la primera generacion
+    pokemonUrls = pokemonUrls.slice(0,151);
 
     //Ejecuto cada URL de cada pokémon para obtener su información
     const pokemonsApi = await Promise.all(
-        allPokemonsUrls.map(async (url) => {
+        pokemonUrls.map(async (url) => {
             const resultApi = (await axios.get(url)).data;
             return infoPokemon(resultApi)
         })
     )
     return [...pokemonsApi, ...pokemonsDB];
 };
-
-const getNextPage = async (nextUrl) => {
-    const getNext = (await axios.get(nextUrl)).data;
-    return getNext.results.map(data => data.url);
-}
-
 
 const getQuery = async (name) => {
         const pokemonName = name.toLowerCase();
