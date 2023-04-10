@@ -1,14 +1,30 @@
+.backGround {
+    background-image: url("../../source/backg.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
+    width: 100vw;
+}
 .container {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     flex-wrap: wrap;
-    gap: 1em
+    gap: 0.5em;
+    color: #fff;
+    padding: 2%;
+    font-size: 1em;
 }
 
-p{
-    color: red;
+.checkBoxType {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    right: 25%;
+    font-size: 20px;
 }
 
 .buttonBack {
@@ -19,9 +35,10 @@ p{
     text-align: center;
     text-decoration: none;
     position: absolute;
-    font-size: 8rem;
+    font-size: 2rem;
     font-family: fantasy;
-    top: 40%;
+    top: 10%;
+    left: 2%;
     cursor: pointer;
     border-radius: 50px;
     box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
@@ -29,4 +46,23 @@ p{
 }
 .buttonBack:hover {
     background-color: #f7e81a;
+}
+
+.buttonSubmit{
+    background-color: #fff;
+    border: none;
+    color: #000;
+    padding: 5px 5px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 2rem;
+    font-family: fantasy;
+    border-radius: 50px;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.3s ease-in-out;
+}
+.buttonSubmit:hover{
+    background-color: #d81c1c;
+    color: #fff;
+    cursor: pointer;
 }

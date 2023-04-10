@@ -9,8 +9,8 @@ import Loading from "../../components/Loading/Loading.jsx";
 function Detail () {
 
     const { idPokemon } = useParams();
-    const pokemon = useSelector(state => state.detail)
-    const [pokemonDetail , setPokemonDetail] = useState({})
+    const pokemon = useSelector(state => state.detail);
+    const [pokemonDetail , setPokemonDetail] = useState({});
     const dispatch = useDispatch();
     const navigate = useNavigate();
     

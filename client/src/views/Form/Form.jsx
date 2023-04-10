@@ -79,7 +79,7 @@ function Form () {
     };
 
     return(
-        <div>
+        <div className={styles.backGround}>
             <button className={styles.buttonBack} onClick={() => navigate(-1)}>Back</button>
             <form className={styles.container} onSubmit={handleSubmit}>
                 {/* LABEL INPUT NAME */}
@@ -90,7 +90,9 @@ function Form () {
                     value={pokeData.name}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.name}</p>
+                <p style={{color:"red"}}>
+                    {errors.name}
+                </p>
                 {/* LABEL INPUT HP */}
                 <label>HP *</label>
                 <input
@@ -99,7 +101,9 @@ function Form () {
                     value={pokeData.hp}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.hp}</p>
+                <p style={{color:"red"}}>
+                    {errors.hp}
+                </p>
                 {/* LABEL INPUT ATTACK */}
                 <label>Attack *</label>
                 <input
@@ -108,7 +112,9 @@ function Form () {
                     value={pokeData.attack}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.attack}</p>
+                <p style={{color:"red"}}>
+                    {errors.attack}
+                </p>
                 {/* LABEL INPUT DEFENSE */}
                 <label>Defense *</label>
                 <input
@@ -117,7 +123,9 @@ function Form () {
                     value={pokeData.defense}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.defense}</p>
+                <p style={{color:"red"}}>
+                    {errors.defense}
+                </p>
                 {/* LABEL INPUT SPEED */}
                 <label>Speed</label>
                 <input
@@ -126,7 +134,9 @@ function Form () {
                     value={pokeData.speed}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.speed}</p>
+                <p style={{color:"red"}}>
+                    {errors.speed}
+                </p>
                 {/* LABEL INPUT HEIGHT */}
                 <label>Height</label>
                 <input
@@ -135,7 +145,9 @@ function Form () {
                     value={pokeData.height}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.height}</p>
+                <p style={{color:"red"}}>
+                    {errors.height}
+                </p>
                 {/* LABEL INPUT WEIGHT */}
                 <label>Weight</label>
                 <input
@@ -144,9 +156,12 @@ function Form () {
                     value={pokeData.weight}
                     onChange={handlerInputChange}
                 />
-                <p>{errors.weight}</p>
+                <p style={{color:"red"}}>
+                    {errors.weight}
+                </p>
                 {/* CHECKBOX TIPOS */}
-                <div>
+                <div className={styles.checkBoxType}>
+                    Pokémon Types
                     {types 
                         ? types.map(tipo => (
                             <label key={tipo.id} htmlFor={tipo.id}>
@@ -163,7 +178,7 @@ function Form () {
                             : null
                     }
                 </div>
-                <button type="submit">Submit</button>
+                <button type="submit" className={styles.buttonSubmit}>Submit</button>
             </form>
         </div>
     )

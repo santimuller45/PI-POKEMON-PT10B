@@ -1,4 +1,4 @@
-// import './App.css';
+import './App.css';
 import { Route , Routes } from 'react-router-dom';
 import { Landing , Home , Detail , Form } from './views/index.js';
 

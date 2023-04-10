@@ -10,7 +10,8 @@ function SearchBox ({ setCurrentPage }) {
     const [ pokemon , setPokemon ] = useState("");
 
     const handleInput = (e) => {
-        setPokemon([e.target.value])
+        e.preventDefault();
+        setPokemon(e.target.value);
     }
 
     const handleSearch = (e) => {
@@ -24,12 +25,11 @@ function SearchBox ({ setCurrentPage }) {
         <div className={styles.searchContainer}>
             <input
                 placeholder="Search Pokémon..."
-                name="name"
                 type="text"
-                value={pokemon}
                 onChange={handleInput}
+                value={pokemon}
             />
-            <button onClick={handleSearch}>Search</button>
+            <button type="submit" onClick={handleSearch}>Search</button>
         </div> 
     )
 }

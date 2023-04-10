@@ -10,7 +10,7 @@ pokemonRouter.get("/", async (req,res) => {
         const resultData = name ? await getQuery(name) : await getPokemons() 
         return res.status(200).json(resultData);
     } catch (error) {
-        res.status(400).json({error:"No se encontro un Pokémon con ese nombre"});
+        return res.status(400).send("No se encontro un Pokémon con ese nombre");
     }
 });
 
@@ -18,9 +18,9 @@ pokemonRouter.get("/:idPokemon", async (req,res) => {
     try {
         const { idPokemon } = req.params;
         const getPokemon = await getIdPokemon(idPokemon);
-        res.status(200).json(getPokemon);
+        return res.status(200).json(getPokemon);
     } catch (error) {
-        res.status(400).json({error:error.message});
+        return res.status(400).send("Pokémon did not found");
     }
 });
 
@@ -28,9 +28,9 @@ pokemonRouter.post("/", async (req,res) => {
     try {
         const { name , image , hp , attack , defense , speed , height , weight , type } = req.body;
         const newPokemon = await addPokemon( name , image , hp , attack , defense , speed , height , weight , type);
-        res.status(201).json(newPokemon);
+        return res.status(201).json("Pokémon created succesfully!");
     } catch(error) {
-        res.status(400).json({error:error.message});
+        return res.status(400).send("Faltan datos a completar");
     }
 });
 

@@ -21,6 +21,21 @@ const infoPokemon = (data) => {
         }
 };
 
+// const getPokemons = async () => {
+//     const pokemonsDB = await Pokemon.findAll({ include : { model : Type }});
+//     const apiData = (await axios.get("https://pokeapi.co/api/v2/pokemon?limit=151")).data;
+//     const pokemonUrls = apiData.results.map(pokemon => pokemon.url);
+//     const allPokemonsUrls = pokemonUrls.slice(0, 151);
+
+//     //Ejecuto cada URL de cada pokémon para obtener su información
+//     const pokemonsApi = await Promise.all(
+//         allPokemonsUrls.map(async (url) => {
+//             const resultApi = (await axios.get(url)).data;
+//             return infoPokemon(resultApi)
+//         })
+//     )
+//     return [...pokemonsApi, ...pokemonsDB];
+// };
 
 const getPokemons = async () => {
     const pokemonsDB = await Pokemon.findAll({ include : { model : Type }});
@@ -45,6 +60,7 @@ const getNextPage = async (nextUrl) => {
     const getNext = (await axios.get(nextUrl)).data;
     return getNext.results.map(data => data.url);
 }
+
 
 const getQuery = async (name) => {
         const pokemonName = name.toLowerCase();

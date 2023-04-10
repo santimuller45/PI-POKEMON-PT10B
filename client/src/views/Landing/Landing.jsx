@@ -9,18 +9,9 @@ function Landing () {
     return(
         <div className={styles.backGround}>
             <h1 className={styles.title}>Bienvenidos al PI Pokémon</h1>
-            <button className={styles.buttonHome} onClick={() => navigate("/home")}>Ingresar al PI</button>
+            <button className={styles.buttonHome} onClick={() => navigate("/home")}>Home</button>
         </div>
     )
 }
-
-// //.backGround{
-//     background-image: url("../../source/background.jpg");
-//     background-size: cover;
-//     background-position: center;
-//     background-repeat:no-repeat;
-//     height: 100vh;
-//     width: 100vw;
-// }
 
 export default Landing;
