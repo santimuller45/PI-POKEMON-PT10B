@@ -1,5 +1,5 @@
 .backGround {
-    background-image: url("../../source/background.jpg");
+    background-image: url("../../source/backg.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -16,8 +16,8 @@
 }
 
 .image {
-    width: 50vw;
-    height: 50vh;
+    width: 40vw;
+    height: 40vh;
 }
   
 .stats {

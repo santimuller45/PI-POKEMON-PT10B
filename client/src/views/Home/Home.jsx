@@ -1,24 +1,21 @@
 import React, { useState } from "react";
 import styles from "./Home.module.css"
-import CardContainer from "../../components/CardContainer/CardContainer.jsx";
-import Pagination from "../../components/Pagination/Pagination.jsx";
-import { useEffect } from "react";
 import { useSelector , useDispatch } from "react-redux";
-import { getPokemons, getTypes , orderCards , filterSource , filterType } from "../../components/redux/actions.js";
-import SearchBox from "../../components/SearchBox/SearchBox.jsx";
-import Nav from "../../components/Nav/Nav.jsx";
+import { getPokemons, orderCards , filterSource , filterType } from "../../components/redux/actions.js";
+import { Pagination , CardContainer , SearchBox , Nav , Loading } from "../../components/index.js";
 
 function Home () {
 
     const dispatch = useDispatch();
-    const allPokemon = useSelector(state => state.pokemons);
+    const allPokemons = useSelector(state => state.pokemons);
     const allTypes = useSelector(state => state.allTypes);
-    
+
+    const [loading , setLoading] = useState(false);
     const [currentPage , setCurrentPage ] = useState(1);
     const pokemonPerPage = 12;
     const indexOfLastPokemon = currentPage * pokemonPerPage;
     const indexOfFirstPokemon = indexOfLastPokemon - pokemonPerPage;
-    const currentPokemons = allPokemon.slice( indexOfFirstPokemon, indexOfLastPokemon );
+    const currentPokemons = allPokemons.slice( indexOfFirstPokemon, indexOfLastPokemon );
 
     const paginado = (pageNumber) => {
         setCurrentPage(pageNumber);
@@ -40,17 +37,16 @@ function Home () {
     }
 
     const reloadPage = () => {
+        setLoading(true);
         dispatch(getPokemons());
         setCurrentPage(1);
+        setTimeout(() => {
+            setLoading(false)
+        }, 5500);
     }
 
-    useEffect(() => {
-        dispatch(getPokemons());
-        dispatch(getTypes());
-    },[dispatch])
-
     return(
-        <div className={styles.backGround}>
+        <div>
             <Nav/>
             <nav className={styles.displayBar}>
                 <button onClick={reloadPage} className={styles.refresh}>Refresh Pokémons</button>
@@ -80,8 +76,13 @@ function Home () {
                 </div>
                 <SearchBox setCurrentPage={setCurrentPage}></SearchBox>
             </nav>
-            <CardContainer currentPokemons={currentPokemons}/>
-            <Pagination pokemonPerPage={pokemonPerPage} allPokemon={allPokemon.length} paginado={paginado} currentPage={currentPage}/>
+            {!currentPokemons.length || loading === true
+                ? <Loading/>
+                :   <>  
+                        <CardContainer currentPokemons={currentPokemons}/>
+                        <Pagination pokemonPerPage={pokemonPerPage} allPokemon={allPokemons.length} paginado={paginado} currentPage={currentPage}/>
+                    </>
+            }
         </div>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useEffect , useState} from "react";
 import styles from "./Detail.module.css"
-import { useNavigate, useParams } from "react-router-dom";
 import defaultImg from "../../source/pokeball.png"
+import { useNavigate, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { detailPokemon } from "../../components/redux/actions.js";
 import Loading from "../../components/Loading/Loading.jsx";

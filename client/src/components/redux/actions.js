@@ -10,41 +10,57 @@ export const FILTER_BY_TYPE = "FILTER_BY_TYPE";
 
 export const getPokemons = () => {
     return async function(dispatch) {
-        const pokemons = (await axios.get("http://localhost:3001/pokemons")).data;
-        dispatch({
-            type: GET_POKEMONS,
-            payload: pokemons
-        });
+        try {
+            const pokemons = (await axios.get("http://localhost:3001/pokemons")).data;
+            return dispatch({
+                type: GET_POKEMONS,
+                payload: pokemons
+            });
+        } catch (error) {
+            console.log(error)
+        }
     };
 };
 
 export const detailPokemon = (id) => {
     return async function(dispatch) {
-        const detail = (await axios.get(`http://localhost:3001/pokemons/${id}`)).data;
-        dispatch({
-            type: DETAIL_POKEMON,
-            payload: detail
-        })
+        try {
+            const detail = (await axios.get(`http://localhost:3001/pokemons/${id}`)).data;
+            return dispatch({
+                type: DETAIL_POKEMON,
+                payload: detail
+            })
+        } catch (error) {
+            console.log(error)
+        }
     }
 };
 
 export const getTypes = () => {
     return async function(dispatch){
-        const types = (await axios.get("http://localhost:3001/types")).data;
-        dispatch({
-            type: GET_TYPES,
-            payload: types
-        })
+        try {
+            const types = (await axios.get("http://localhost:3001/types")).data;
+            return dispatch({
+                type: GET_TYPES,
+                payload: types
+            })
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
 
 export const searchPokemon = (pokeName) => {
     return async function(dispatch) {
-        const pokemon = (await axios.get(`http://localhost:3001/pokemons?name=${pokeName}`)).data;
-        dispatch({
-            type: SEARCH,
-            payload: pokemon
-        })
+        try {
+            const pokemon = (await axios.get(`http://localhost:3001/pokemons?name=${pokeName}`)).data;
+            return dispatch({
+                type: SEARCH,
+                payload: pokemon
+            });
+        } catch (error) {
+            console.log(error);
+        }
     }
 };
 

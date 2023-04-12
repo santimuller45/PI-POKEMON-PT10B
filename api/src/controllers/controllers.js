@@ -3,13 +3,13 @@ const { Pokemon , Type} = require("../db.js");
 const { Op } = require("sequelize");
 
 //función para poner en mayúsculas la primer letra
-const mayusLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+const mayusFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
 // función para obtener todos los datos del pokémon en limpio
 const infoPokemon = (data) => {
         return {
             id: data.id,
-            name: mayusLetter(data.name),
+            name: mayusFirstLetter(data.name),
             image: data.sprites.other.dream_world.front_default,
             hp: data.stats[0].base_stat,
             attack: data.stats[1].base_stat,
@@ -17,32 +17,18 @@ const infoPokemon = (data) => {
             speed: data.stats[5].base_stat,
             height: data.height,
             weight: data.weight,
-            types: data.types.map(tipo => mayusLetter(tipo.type.name))
+            types: data.types.map(tipo => mayusFirstLetter(tipo.type.name))
         }
 };
 
-// const getPokemons = async () => {
-//     const pokemonsDB = await Pokemon.findAll({ include : { model : Type }});
-//     const apiData = (await axios.get("https://pokeapi.co/api/v2/pokemon?limit=151")).data;
-//     const pokemonUrls = apiData.results.map(pokemon => pokemon.url);
-//     const allPokemonsUrls = pokemonUrls.slice(0, 151);
-
-//     //Ejecuto cada URL de cada pokémon para obtener su información
-//     const pokemonsApi = await Promise.all(
-//         allPokemonsUrls.map(async (url) => {
-//             const resultApi = (await axios.get(url)).data;
-//             return infoPokemon(resultApi)
-//         })
-//     )
-//     return [...pokemonsApi, ...pokemonsDB];
-// };
+/////////////////////////////////////////////////////////////////////////////////////////
 
 const getPokemons = async () => {
     const pokemonsDB = await Pokemon.findAll({ include : { model : Type }});
 
     // Realizo la primera solicitud a la API para obtener los primeros 20 pokémon
     const apiData = (await axios.get("https://pokeapi.co/api/v2/pokemon/")).data;
-    let pokemonUrls = apiData.results.map(pokemon => pokemon.url);
+    const pokemonUrls = apiData.results.map(pokemon => pokemon.url);
 
     // Realizo 7 solicitudes más para obtener más pokémon
     let nextPageUrl = apiData.next;
@@ -53,12 +39,12 @@ const getPokemons = async () => {
         nextPageUrl = nextPageData.next;
     }
 
-    //Reduce a 151 pokemons para obtener los de la primera generacion
-    pokemonUrls = pokemonUrls.slice(0,151);
+    //Creo una constante para devolver los 151 pokemons de la primera generacion
+    const firstGenPokemon = pokemonUrls.slice(0,151);
 
     //Ejecuto cada URL de cada pokémon para obtener su información
     const pokemonsApi = await Promise.all(
-        pokemonUrls.map(async (url) => {
+        firstGenPokemon.map(async (url) => {
             const resultApi = (await axios.get(url)).data;
             return infoPokemon(resultApi)
         })
@@ -82,7 +68,6 @@ const getQuery = async (name) => {
 };
 
 const getIdPokemon = async (id) => {
-    try{
         if(isNaN(id)) {
             const findPokemonDB = await Pokemon.findByPk(id,{
                 include:{
@@ -97,9 +82,6 @@ const getIdPokemon = async (id) => {
 
             return resultsApi;
         }
-    } catch (error) {
-        throw Error(`No se encontro pokémon con el id: ${id}`)
-    }  
 };
 
 const addPokemon = async ( name , image, hp , attack , defense , speed , height , weight, type ) => {
@@ -114,7 +96,7 @@ const getTypes = async () => {
     const callDB = await Type.findAll()
     if (!callDB.length){
         const apiTypes = (await axios.get("https://pokeapi.co/api/v2/type")).data;
-        const resultTypes = apiTypes.results.map(type => ({ name: mayusLetter(type.name) }));
+        const resultTypes = apiTypes.results.map(type => ({ name: mayusFirstLetter(type.name) }));
         await Type.bulkCreate(resultTypes);
         const typesDB = await Type.findAll();
         return typesDB;

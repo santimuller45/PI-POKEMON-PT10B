@@ -82,7 +82,7 @@ function reducerPokemon(state = initialState , actions) {
         case FILTER_BY_TYPE: {
             let filteredType = actions.payload === "all" 
             ? state.allPokemons
-            : state.allPokemons.filter(pokemon => (pokemon.types.map(elem => elem)).includes(actions.payload));
+            : state.allPokemons.filter(pokemon => (pokemon.types.map(elem => elem.name ? elem.name : elem)).includes(actions.payload));
 
             return {
                 ...state,

@@ -1,9 +1,17 @@
 import './App.css';
 import { Route , Routes } from 'react-router-dom';
 import { Landing , Home , Detail , Form } from './views/index.js';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { getPokemons , getTypes } from './components/redux/actions';
 
 function App() {
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(getPokemons());
+    dispatch(getTypes());
+  },[dispatch])
 
   return (
     <div className="App">

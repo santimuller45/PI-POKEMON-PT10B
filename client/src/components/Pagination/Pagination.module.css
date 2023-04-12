@@ -29,6 +29,20 @@
 .currentPage {
     font-weight: bold;
 }
+
+.buttonPrevNext {
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+    color: #000;
+    transition: all 0.2s ease-in-out;
+}
+
+.buttonPrevNext:hover {
+    font-weight: bold;
+}
   
   
   
