@@ -14,17 +14,6 @@
 <br />
 
 ---
-
-## **⏱ HORARIOS Y FECHAS**
-
-El proyecto individual tiene una duración máxima de tres semanas. Se inicia la primera semana con un Kick-Off, y se agendará una corrección personalizada la última semana.
-
-En el caso de completar todas las tareas antes de dicho lapso se podrá avisar a su instructor para coordinar una fecha de presentación del trabajo (DEMO).
-
-<br />
-
----
-
 ## **⚠️ IMPORTANTE**
 
 Es necesario contar minimamente con la última versión estable de NodeJS y NPM. Asegúrate de contar con ella para poder instalar correctamente las dependecias necesarias para correr el proyecto. Actualmente las versiónes necesarias son:
@@ -48,8 +37,6 @@ npm -v
 -  **react-redux**: 7.2.3
 
 Está permitido, **bajo tu responsabilidad**, actualizar las dependencias a versiones más actuales si lo deseas. Versiones mas actuales podrían presentar configuraciones diferentes respecto a las versiones en las que venimos trabajando durante el bootcamp.
-
-### **⛔️ Está rotundamente prohibido utilizar librerías externas para aplicar estilos a la SPA. Tendrás que utilizar CSS mediante algunas de las opciones vistas en el bootcamp (CSS puro, CSS Modules o Styled Components).**
 
 <br />
 
@@ -89,16 +76,6 @@ La idea de este proyecto es construir una aplicación web a partir de la API [**
 
 ⚠️ Para las funcionalidades de filtrado y ordenamiento NO se puede utilizar los endpoints de la API externa que ya devuelven los resultados filtrados u ordenados.
 
-### **Únicos end-points que se pueden utilizar**
-
--  [**PokeApi**](https://pokeapi.co/api/v2/pokemon)
--  **Por id**: _"https://pokeapi.co/api/v2/pokemon/{id}"_
--  **Por nombre**: _"https://pokeapi.co/api/v2/pokemon/{name}"_
--  **Por tipo**: _"https://pokeapi.co/api/v2/type"_
-
-<br />
-
----
 
 ## **📁 INSTRUCCIONES**
 
@@ -235,21 +212,5 @@ Este formulario debe ser **controlado completamente con JavaScritp**. No se pued
 <br />
 
 ---
-
-<br />
-
-### **🖱 TESTING**
-
-Ten en cuenta que en esta instancia no es obligatorio el desarrollo de testing para tu aplicación. De igual manera, te desafiamos a que los hagas, ¡ya que suman puntos!
-
--  Al menos tener un componente del frontend con sus tests respectivos.
--  Al menos tener dos rutas del backend con sus tests respectivos.
--  Al menos tener un modelo de la base de datos con sus tests respectivos.
-
-<br />
-
----
-
-<br />
 
 <img src="./pokemon.png" alt="" />
